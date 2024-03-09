@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST File Format//EN" "https://www.apple.com/DTDs/PropertyList.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.grimgram.bluppydaemon</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/grimgram/.local/bin/bluppyd</string>
+  </array>
+  <key>RunAsUser</key>
+  <string>root</string>  <key>WorkingDirectory</key>
+  <string>/var/tmp</string>  <key>StandardOutPath</key>
+  <string>/var/log/bluppyd.log</string> <key>StandardErrorPath</key>
+  <string>/var/log/bluppyd.log</string> </dict>
+</plist>
