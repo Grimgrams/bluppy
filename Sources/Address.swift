@@ -91,4 +91,21 @@ func saveAddress(name: String, addr: String){
     print("\n\n- Saved to Database, checking connection...")
 }
 
+func removeAddress(name: String, address: String){
+    do{
+        let connection = try getConnection()
+        defer {connection.close()}
+        
+        let removeQuery = "DELETE FROM addresses WHERE address = $1 OR server_name = $2;"
+        let statement = try connection.prepareStatement(text: removeQuery)
+        defer {statement.close()}
+        
+        let cursor = try statement.execute(parameterValues: [ address, name ])
+        do{cursor.close()}
+        print("Removed Server From Database.")
+    }catch {
+        print(error)
+    }
+}
+
 

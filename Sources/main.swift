@@ -10,6 +10,8 @@ struct BLPOptions: ParsableCommand, Decodable{
     var ip: String
     @Flag(name: .shortAndLong, help: "save ip to file (off by default)" )
     var Save: Bool = false
+    @Flag(name: .shortAndLong, help: "Remove address from database")
+    var Remove: Bool = false
     
     mutating func run() throws {
         if Save {
@@ -17,8 +19,15 @@ struct BLPOptions: ParsableCommand, Decodable{
         } else {
             print("Not Saving\n")
         }
-        print("\(ServerName): \(ip)")
-        pingServer(address: ip)
+        
+        if(Remove) {
+            removeAddress(name: ServerName, address: ip)
+            // exit
+        } else {
+            print("\(ServerName): \(ip)")
+            pingServer(address: ip)
+        }
+        
     }
 }
 
