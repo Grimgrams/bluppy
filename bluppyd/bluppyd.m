@@ -187,7 +187,8 @@ void getLatestStatus(void) {
 - (void)start{
     
    while(true){
-   sleep(25200);
+       //every 4 hours
+   sleep(14400);
    getLatestStatus();
    }
     
