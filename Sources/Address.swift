@@ -102,10 +102,42 @@ func removeAddress(name: String, address: String){
         
         let cursor = try statement.execute(parameterValues: [ address, name ])
         do{cursor.close()}
-        print("Removed Server From Database.")
+        print("Removed Server: \(name):~\(address) From Database.")
     }catch {
         print(error)
     }
 }
 
+func updateName(serverName: String, ServerAddress: String){
+    do{
+        let connection = try getConnection()
+        defer {connection.close()}
+        
+        let updateQuery = "UPDATE addresses SET server_name = $1 WHERE address = $2;"
+        let statement = try connection.prepareStatement(text: updateQuery)
+        defer {statement.close()}
+        
+        let cursor = try statement.execute(parameterValues: [ serverName, ServerAddress])
+        do{cursor.close()}
+        print("Updated server: \(ServerAddress) to \(serverName)")
+    }catch {
+        print(error)
+    }
+}
 
+func updateAddress(serverName: String, ServerAddress: String){
+    do{
+        let connection = try getConnection()
+        defer {connection.close()}
+        
+        let updateQuery = "UPDATE addresses SET address = $1 WHERE server_name = $2;"
+        let statement = try connection.prepareStatement(text: updateQuery)
+        defer {statement.close()}
+        
+        let cursor = try statement.execute(parameterValues: [ ServerAddress, serverName])
+        do{cursor.close()}
+        print("Updated server: \(serverName) to \(ServerAddress)")
+    }catch {
+        print(error)
+    }
+}
